@@ -4,17 +4,25 @@ Command: npx gltfjsx@6.2.3 public/models/hexagon.glb -o src/components/Hexagon.j
 */
 
 import { useGLTF } from "@react-three/drei";
-import React from "react";
+import React, {useMemo} from "react";
+import { Color } from "three";
+import { MathUtils, randFloat, randInt } from "three/src/math/MathUtils.js";
 
 export function Hexagon({ color, ...props }) {
   const { nodes, materials } = useGLTF("/models/hexagon.glb", "draco/gltf/");
+
+  const randomizedColor = useMemo(() => {
+    const alteredColor = new Color(color);
+    alteredColor.multiplyScalar(randFloat(0.5, 1.2));
+    return alteredColor;
+  }, [color]);
 
   return (
     <group {...props}>
       <mesh geometry={nodes.Hexagon.geometry} material={materials.hexagon}>
         <meshStandardMaterial
           {...materials.hexagon}
-          color={color}
+          color={randomizedColor}
           transparent
         />
       </mesh>
