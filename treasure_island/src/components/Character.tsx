@@ -10,7 +10,7 @@ import { SkeletonUtils } from "three-stdlib";
 
 export function Character({
   animation = "wave", // FG_Run_A, FG_Walk_A, FG_Idle_A
-  color = "yellow",
+  color = "orange",
   name = "Player",
   ...props
 }) {
