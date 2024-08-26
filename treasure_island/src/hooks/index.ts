@@ -1,1 +1,2 @@
-export * from './useAudioManager'
+export * from './useAudioManager';
+export * from './useGameState';

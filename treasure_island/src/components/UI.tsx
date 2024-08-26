@@ -1,7 +1,9 @@
 import { useAudioManager } from "../hooks/useAudioManager";
+import { useGameState } from "../hooks/useGameState";
 
 export const UI = () => {
   const { audioEnabled, setAudioEnabled } = useAudioManager();
+  const { timer, startGame, host, stage} = useGameState();
 
   return (
     <main
@@ -18,6 +20,25 @@ export const UI = () => {
       ">
         ~ Dojo Island ~
         </div>
+
+      {stage === "lobby" && (
+        <>
+        {host ? (
+          <button
+            className="
+            pointer-events-auto
+            bg-green-700 text-white px-4 py-2 rounded-lg"
+            onClick={startGame}
+          >
+            START
+          </button> 
+        ):(
+          <p className="italic text-white">
+            Waiting for the host to start the game...
+          </p>
+        )}
+        </>
+      )}
 
       {/* Audio Button */}
       <button

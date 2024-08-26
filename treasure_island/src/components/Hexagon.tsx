@@ -4,6 +4,7 @@ Command: npx gltfjsx@6.2.3 public/models/hexagon.glb -o src/components/Hexagon.j
 */
 
 import { useGLTF } from "@react-three/drei";
+import { RigidBody } from "@react-three/rapier";
 import React, {useMemo} from "react";
 import { Color } from "three";
 import { MathUtils, randFloat, randInt } from "three/src/math/MathUtils.js";
@@ -18,7 +19,9 @@ export function Hexagon({ color, ...props }) {
   }, [color]);
 
   return (
-    <group {...props}>
+    <RigidBody {...props} type={"fixed"} 
+      name="hexagon" colliders="hull"
+      >
       <mesh geometry={nodes.Hexagon.geometry} material={materials.hexagon}>
         <meshStandardMaterial
           {...materials.hexagon}
@@ -26,7 +29,7 @@ export function Hexagon({ color, ...props }) {
           transparent
         />
       </mesh>
-    </group>
+    </RigidBody>
   );
 }
 
